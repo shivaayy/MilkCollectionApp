@@ -113,26 +113,35 @@ public class MainActivity extends AppCompatActivity {
 
                     calculated_per_kg_fat_price=(milkprice_value*300)/((3*avgfat_value)+(2*avgSNF_value));
 
-                    calculated_milk_price=((milkfat_value*calculated_per_kg_fat_price)/100)+
-                            ((2*milkSNF_value*calculated_per_kg_fat_price)/300);
+//                    calculated_milk_price=((milkfat_value*calculated_per_kg_fat_price)/100)+
+//                            ((2*milkSNF_value*calculated_per_kg_fat_price)/300);
+
+                    calculated_milk_price=((3*milkfat_value*milkprice_value)+(2*milkSNF_value*milkprice_value))/((3*avgfat_value)+(2*avgSNF_value));
+                    calculated_milk_price= (float) (Math.round(calculated_milk_price*100.0)/100.0);
 //                    total_price=calculated_milk_price*milkquantity_value;
                     fat_checked="Yes";
                     SNF_checked="Yes";
 
                 }
                 else if (includefat_value){
-                    calculated_per_kg_fat_price=(milkprice_value*100)/(avgfat_value);
+//                    calculated_per_kg_fat_price=(milkprice_value*100)/(avgfat_value);
 
-                    calculated_milk_price=((milkfat_value*calculated_per_kg_fat_price)/100);
+                    calculated_milk_price=((3*milkfat_value*milkprice_value)+(2*avgSNF_value*milkprice_value))/((3*avgfat_value)+(2*avgSNF_value));
+                    calculated_milk_price= (float) (Math.round(calculated_milk_price*100.0)/100.0);
+
+//                    calculated_milk_price=((milkfat_value*calculated_per_kg_fat_price)/100);
 //                    total_price=calculated_milk_price*milkquantity_value;
                     fat_checked="Yes";
                     SNF_checked="No";
 
                 }
                 else if (includeSNF_value){
-                    calculated_per_kg_fat_price=(milkprice_value*100)/(avgSNF_value);
+//                    calculated_per_kg_fat_price=(milkprice_value*100)/(avgSNF_value);
 
-                    calculated_milk_price=((milkSNF_value*calculated_per_kg_fat_price)/100);
+                    calculated_milk_price=((3*avgfat_value*milkprice_value)+(2*milkSNF_value*milkprice_value))/((3*avgfat_value)+(2*avgSNF_value));
+                    calculated_milk_price= (float) (Math.round(calculated_milk_price*100.0)/100.0);
+
+//                    calculated_milk_price=((milkSNF_value*calculated_per_kg_fat_price)/100);
                     fat_checked="No";
                     SNF_checked="Yes";
 
@@ -150,9 +159,11 @@ public class MainActivity extends AppCompatActivity {
 
                 if(includetear.isChecked()){
                     float tearweight_value=sum_of_string(tearweight.getText().toString());
-                    float total_milk_quantity=milkquantity_value-tearweight_value;
+                    float total_milk_quantity=(float) milkquantity_value-(float) tearweight_value;
+                    total_milk_quantity= (float) (Math.round(total_milk_quantity*1000.0)/1000.0);
 
                     total_price=calculated_milk_price*total_milk_quantity;
+                    total_price= (float) (Math.round(total_price*100.0)/100.0);
 
                     bill="********************* Bill **********************\n"
                             +"\nDate : "+currentDate
@@ -168,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     total_price=calculated_milk_price*milkquantity_value;
+                    total_price= (float) (Math.round(total_price*100.0)/100.0);
                     bill="********************* Bill **********************\n"
                             +"\nDate : "+currentDate
                             +"\n\nAvg Fat: "+avgfat_value+"    Avg SNF : "+avgSNF_value

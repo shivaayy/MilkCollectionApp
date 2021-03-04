@@ -101,7 +101,7 @@
                     android:ems="10"
                     android:hint="Enter avg SNF"
                     android:inputType="textPersonName"
-                    android:text="8.5"
+                    android:text="9.0"
                     android:textColor="#4CAF50" />
 
             </LinearLayout>
